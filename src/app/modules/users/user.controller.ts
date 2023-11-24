@@ -13,6 +13,7 @@ const createUser = async (req: Request, res: Response) => {
     const newUserWithoutPassword = {
       ...result.toObject(),
       password: undefined,
+      _id: undefined,
     };
 
     res.status(200).json({
@@ -103,7 +104,7 @@ const singleUserUpdate = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'User updated successfully! 110 number line',
+      message: 'User updated successfully!',
       data: updated_user,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -116,9 +117,41 @@ const singleUserUpdate = async (req: Request, res: Response) => {
   }
 };
 
+const deleteSingelUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    const updated_user = await UserServices.deletUser(userId);
+
+    if (!updated_user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'User deleted successfully!',
+      data: null,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      data: error,
+    });
+  }
+};
 export const UserController = {
   createUser,
   alluser,
   singleUser,
   singleUserUpdate,
+  deleteSingelUser,
 };

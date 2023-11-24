@@ -42,9 +42,15 @@ const setUpdateUser = async (userId: string, data: any) => {
   return updatedUser;
 };
 
+const deletUser = async (userId: string) => {
+  const result = User.findOneAndDelete({ userId });
+  return result;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
   getSingleUserFromDB,
   setUpdateUser,
+  deletUser,
 };
