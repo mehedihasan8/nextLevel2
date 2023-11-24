@@ -25,12 +25,26 @@ const getAllUserFromDB = async () => {
 };
 
 const getSingleUserFromDB = async (userId: string) => {
-  const result = User.findOne({ userId });
+  const result = User.findOne(
+    { userId },
+    { password: 0, 'fullName._id': 0, _id: 0, 'address._id': 0 },
+  );
   return result;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const setUpdateUser = async (userId: string, data: any) => {
+  const updatedUser = User.findOneAndUpdate({ userId }, data, {
+    new: true,
+    projection: { password: 0 },
+  });
+
+  return updatedUser;
 };
 
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
   getSingleUserFromDB,
+  setUpdateUser,
 };
