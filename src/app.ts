@@ -9,8 +9,6 @@ app.use(cors());
 
 // all application router
 app.use('/api/users', UserRoutes);
-app.use('/api/users', UserRoutes);
-// app.use('/api/users/:userId');
 
 app.get('/', (req: Request, res: Response) => {
   res.send('server running');
