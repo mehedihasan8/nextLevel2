@@ -172,13 +172,8 @@ const addToProduct = async (req: Request, res: Response) => {
       });
     }
 
-    // if (!user.orders) {
-    //   user.orders = [];
-    // }
-
     user.orders = user.orders || [];
 
-    console.log('khubsu i love darlinkg', user);
     user.orders.push({
       productName,
       price,
