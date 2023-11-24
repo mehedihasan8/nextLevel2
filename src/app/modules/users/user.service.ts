@@ -33,7 +33,7 @@ const getSingleUserFromDB = async (userId: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const setUpdateUser = async (userId: string, data: any) => {
+const setUpdateUserFromDB = async (userId: string, data: any) => {
   const updatedUser = User.findOneAndUpdate({ userId }, data, {
     new: true,
     projection: { password: 0 },
@@ -42,20 +42,27 @@ const setUpdateUser = async (userId: string, data: any) => {
   return updatedUser;
 };
 
-const deletUser = async (userId: string) => {
+const deletUserFromDB = async (userId: string) => {
   const result = User.findOneAndDelete({ userId });
   return result;
 };
 
-const orderProducts = async (userId: string) => {
-  const result = await User.findOne({ userId });
+const orderProductsFromDB = async (userId: string) => {
+  const result = User.findOne({ userId });
   return result;
 };
+
+const getAllOrderProductsFromDB = async (userId: string) => {
+  const result = User.findOne({ userId });
+  return result;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
   getSingleUserFromDB,
-  setUpdateUser,
-  deletUser,
-  orderProducts,
+  setUpdateUserFromDB,
+  deletUserFromDB,
+  orderProductsFromDB,
+  getAllOrderProductsFromDB,
 };
