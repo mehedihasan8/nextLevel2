@@ -8,7 +8,7 @@ const createUser = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'user is created successfully',
+      message: 'User created successfully!',
       data: result,
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,6 +21,26 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const alluser = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.getAllUserFromDB();
+    res.status(200).json({
+      success: true,
+      message: 'Users fetched successfully!',
+      data: result,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      data: error,
+    });
+  }
+};
+
 export const UserController = {
   createUser,
+  alluser,
 };
