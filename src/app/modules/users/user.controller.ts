@@ -88,8 +88,12 @@ const singleUserUpdate = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const updatedData = req.body;
+    const zodPassValidData = userMainSchemaZodValidation.parse(updatedData);
 
-    const updated_user = await UserServices.setUpdateUser(userId, updatedData);
+    const updated_user = await UserServices.setUpdateUser(
+      userId,
+      zodPassValidData,
+    );
 
     if (!updated_user) {
       return res.status(404).json({
@@ -121,9 +125,9 @@ const deleteSingelUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
-    const updated_user = await UserServices.deletUser(userId);
+    const deletedUser = await UserServices.deletUser(userId);
 
-    if (!updated_user) {
+    if (!deletedUser) {
       return res.status(404).json({
         success: false,
         message: 'User not found',
@@ -148,10 +152,60 @@ const deleteSingelUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+const addToProduct = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    const { productName, price, quantity } = req.body;
+
+    const user = await UserServices.orderProducts(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      });
+    }
+
+    // if (!user.orders) {
+    //   user.orders = [];
+    // }
+
+    user.orders = user.orders || [];
+
+    console.log('khubsu i love darlinkg', user);
+    user.orders.push({
+      productName,
+      price,
+      quantity,
+    });
+
+    await user.save();
+    res.status(200).json({
+      success: true,
+      message: 'Order created successfully!',
+      data: null,
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      data: error,
+    });
+  }
+};
+
 export const UserController = {
   createUser,
   alluser,
   singleUser,
   singleUserUpdate,
   deleteSingelUser,
+  addToProduct,
 };

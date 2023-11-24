@@ -47,10 +47,15 @@ const deletUser = async (userId: string) => {
   return result;
 };
 
+const orderProducts = async (userId: string) => {
+  const result = await User.findOne({ userId });
+  return result;
+};
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
   getSingleUserFromDB,
   setUpdateUser,
   deletUser,
+  orderProducts,
 };
