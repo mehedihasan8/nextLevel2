@@ -3,6 +3,7 @@ import {
   TAddress,
   TFullName,
   TOrders,
+  TUpdateUser,
   TUser,
   userModel,
 } from './users/user.interface';
@@ -51,6 +52,24 @@ const userMainSchema = new Schema<TUser>({
   hobbies: { type: [String], required: true },
   address: { type: userAddressSchema, required: true },
   orders: [ordersSchema],
+});
+
+export const upDateUserSchema = new Schema<TUpdateUser>({
+  userId: { type: Number },
+  username: { type: String },
+  fullName: {
+    firstName: { type: String },
+    lastName: { type: String },
+  },
+  age: { type: Number },
+  email: { type: String },
+  isActive: { type: Boolean },
+  hobbies: { type: [String] },
+  address: {
+    street: { type: String },
+    city: { type: String },
+    country: { type: String },
+  },
 });
 
 userMainSchema.pre('save', async function (next) {

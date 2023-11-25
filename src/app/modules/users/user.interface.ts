@@ -30,4 +30,22 @@ export type TUser = {
   orders?: TOrders[];
 };
 
-export type userModel = Model<TUser, Record<string, never>>;
+export type TUpdateUser = {
+  userId: number;
+  username: string;
+  fullName: {
+    firstName: string;
+    lastName: string;
+  };
+  age: number;
+  email: string;
+  isActive: boolean;
+  hobbies: string[];
+  address: {
+    street: string;
+    city: string;
+    country: string;
+  };
+};
+
+export type userModel = Model<TUser, TUpdateUser, Record<string, never>>;

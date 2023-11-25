@@ -34,16 +34,20 @@ const getSingleUserFromDB = async (userId: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setUpdateUserFromDB = async (userId: string, data: any) => {
-  const updatedUser = User.findOneAndUpdate({ userId }, data, {
-    new: true,
-    projection: {
-      password: 0,
-      'fullName._id': 0,
-      _id: 0,
-      'address._id': 0,
-      orders: 0,
+  const updatedUser = await User.findOneAndUpdate(
+    { userId },
+    { $set: data },
+    {
+      new: true,
+      projection: {
+        password: 0,
+        'fullName._id': 0,
+        _id: 0,
+        'address._id': 0,
+        orders: 0,
+      },
     },
-  });
+  );
 
   return updatedUser;
 };

@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
-import { userMainSchemaZodValidation } from './user.validation';
+import {
+  upDateUserValidationSchema,
+  userMainSchemaZodValidation,
+} from './user.validation';
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -89,7 +92,7 @@ const singleUserUpdate = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const updatedData = req.body;
-    const zodPassValidData = userMainSchemaZodValidation.parse(updatedData);
+    const zodPassValidData = upDateUserValidationSchema.parse(updatedData);
 
     const updated_user = await UserServices.setUpdateUserFromDB(
       userId,
