@@ -13,9 +13,9 @@ const userAddressSchema = z.object({
 });
 
 const ordersSchema = z.object({
-  productName: z.string(),
-  price: z.number(),
-  quantity: z.number(),
+  productName: z.string().min(1, 'product name must not be empty'),
+  price: z.number().min(1, 'price must not be empty'),
+  quantity: z.number().min(1, 'quantity must not be empty'),
 });
 
 const userMainSchemaZodValidation = z.object({

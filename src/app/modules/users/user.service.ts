@@ -57,6 +57,11 @@ const getAllOrderProductsFromDB = async (userId: string) => {
   return result;
 };
 
+const calculateTotalPriceFromDB = async (userId: string) => {
+  const result = User.findOne({ userId });
+  return result;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getAllUserFromDB,
@@ -65,4 +70,5 @@ export const UserServices = {
   deletUserFromDB,
   orderProductsFromDB,
   getAllOrderProductsFromDB,
+  calculateTotalPriceFromDB,
 };

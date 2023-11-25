@@ -12,9 +12,9 @@ export type TAddress = {
 };
 
 export type TOrders = {
-  productName?: string;
-  price?: number;
-  quantity?: number;
+  productName: string;
+  price: number;
+  quantity: number;
 };
 
 export type TUser = {
@@ -27,7 +27,7 @@ export type TUser = {
   isActive: boolean;
   hobbies: string[];
   address: TAddress;
-  orders: TOrders[];
+  orders?: TOrders[];
 };
 
 export type userModel = Model<TUser, Record<string, never>>;
