@@ -27,7 +27,7 @@ const getAllUserFromDB = async () => {
 const getSingleUserFromDB = async (userId: string) => {
   const result = User.findOne(
     { userId },
-    { password: 0, 'fullName._id': 0, _id: 0, 'address._id': 0 },
+    { password: 0, 'fullName._id': 0, _id: 0, 'address._id': 0, orders: 0 },
   );
   return result;
 };
@@ -36,7 +36,13 @@ const getSingleUserFromDB = async (userId: string) => {
 const setUpdateUserFromDB = async (userId: string, data: any) => {
   const updatedUser = User.findOneAndUpdate({ userId }, data, {
     new: true,
-    projection: { password: 0 },
+    projection: {
+      password: 0,
+      'fullName._id': 0,
+      _id: 0,
+      'address._id': 0,
+      orders: 0,
+    },
   });
 
   return updatedUser;
@@ -47,17 +53,7 @@ const deletUserFromDB = async (userId: string) => {
   return result;
 };
 
-const orderProductsFromDB = async (userId: string) => {
-  const result = User.findOne({ userId });
-  return result;
-};
-
-const getAllOrderProductsFromDB = async (userId: string) => {
-  const result = User.findOne({ userId });
-  return result;
-};
-
-const calculateTotalPriceFromDB = async (userId: string) => {
+const functionFindONe = async (userId: string) => {
   const result = User.findOne({ userId });
   return result;
 };
@@ -68,7 +64,5 @@ export const UserServices = {
   getSingleUserFromDB,
   setUpdateUserFromDB,
   deletUserFromDB,
-  orderProductsFromDB,
-  getAllOrderProductsFromDB,
-  calculateTotalPriceFromDB,
+  functionFindONe,
 };

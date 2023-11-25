@@ -160,7 +160,7 @@ const addToProduct = async (req: Request, res: Response) => {
 
     const { productName, price, quantity } = req.body;
 
-    const user = await UserServices.orderProductsFromDB(userId);
+    const user = await UserServices.functionFindONe(userId);
 
     if (!user) {
       return res.status(404).json({
@@ -196,10 +196,11 @@ const addToProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
 const getToProduct = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const user = await UserServices.getAllOrderProductsFromDB(userId);
+    const user = await UserServices.functionFindONe(userId);
 
     if (!user) {
       return res.status(404).json({
@@ -243,7 +244,7 @@ const getToProduct = async (req: Request, res: Response) => {
 const calculateTotalPrice = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    const user = await UserServices.getAllOrderProductsFromDB(userId);
+    const user = await UserServices.functionFindONe(userId);
 
     if (!user) {
       return res.status(404).json({

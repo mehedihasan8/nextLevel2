@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a Node.js Express application developed in TypeScript. It integrates MongoDB with Mongoose for user data and order management. The application focuses on achieving CRUD operations with data integrity through validation using Joi/Zod.
+This project is a Node.js Express application developed in TypeScript. It integrates MongoDB with Mongoose for user data and order management. The application focuses on achieving CRUD operations with data integrity through validation using Zod.
 
 ## Prerequisites
 
@@ -38,6 +38,8 @@ To run this project locally, follow these steps:
 
    ```typescript
    npm run start:prod
+   or
+   npm run start:dev
    ```
 
 then access the API, make requests to `http://localhost:5000` your local server.
@@ -53,19 +55,19 @@ then access the API, make requests to `http://localhost:5000` your local server.
 ### Get User by ID
 
 - **Method:** `GET`
-- **URL:** `http://localhost:5000/users/{userId}`
+- **URL:** `http://localhost:5000/api/users/{userId}`
 - **Description:** Get User by ID
 
 ### Update User by ID
 
 - **Method:** `PUT`
-- **URL:** `http://localhost:5000/api/{userId}`
+- **URL:** `http://localhost:5000/api/users/{userId}`
 - **Description:** Update User by ID
 
 ### Delete User by ID
 
 - **Method:** `DELETE`
-- **URL:** `http://localhost:5000/api/{userId}`
+- **URL:** `http://localhost:5000/api/users/{userId}`
 - **Description:** Delete User by ID
 
 ### Get All Users
@@ -73,6 +75,26 @@ then access the API, make requests to `http://localhost:5000` your local server.
 - **Method:** `GET`
 - **URL:** `http://localhost:5000/api/users`
 - **Description:** Get All Users
+
+# API user orders
+
+### add order users
+
+- **Method:** `PUT`
+- **URL:** `http://localhost:5000api/users/{userId}/orders`
+- **Description:** add order users
+
+### get order users
+
+- **Method:** `GET`
+- **URL:** `http://localhost:5000api/users/{userId}/orders`
+- **Description:** get order users
+
+### Calculate Total Price of Orders
+
+- **Method:** `GET`
+- **URL:** `http://localhost:5000api/users/{userId}/orders/total-price`
+- **Description:** Calculate Total Price of Orders
 
 ## host on vercel
 

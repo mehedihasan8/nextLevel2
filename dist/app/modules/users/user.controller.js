@@ -147,7 +147,7 @@ const addToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { userId } = req.params;
         const { productName, price, quantity } = req.body;
-        const user = yield user_service_1.UserServices.orderProductsFromDB(userId);
+        const user = yield user_service_1.UserServices.functionFindONe(userId);
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -183,7 +183,7 @@ const addToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 const getToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
-        const user = yield user_service_1.UserServices.getAllOrderProductsFromDB(userId);
+        const user = yield user_service_1.UserServices.functionFindONe(userId);
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -223,7 +223,7 @@ const getToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 const calculateTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
-        const user = yield user_service_1.UserServices.getAllOrderProductsFromDB(userId);
+        const user = yield user_service_1.UserServices.functionFindONe(userId);
         if (!user) {
             return res.status(404).json({
                 success: false,

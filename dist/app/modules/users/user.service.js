@@ -30,7 +30,7 @@ const getAllUserFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const getSingleUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = user_mode_1.User.findOne({ userId }, { password: 0, 'fullName._id': 0, _id: 0, 'address._id': 0 });
+    const result = user_mode_1.User.findOne({ userId }, { password: 0, 'fullName._id': 0, _id: 0, 'address._id': 0, orders: 0 });
     return result;
 });
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,15 +45,7 @@ const deletUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* 
     const result = user_mode_1.User.findOneAndDelete({ userId });
     return result;
 });
-const orderProductsFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = user_mode_1.User.findOne({ userId });
-    return result;
-});
-const getAllOrderProductsFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = user_mode_1.User.findOne({ userId });
-    return result;
-});
-const calculateTotalPriceFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+const functionFindONe = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = user_mode_1.User.findOne({ userId });
     return result;
 });
@@ -63,7 +55,5 @@ exports.UserServices = {
     getSingleUserFromDB,
     setUpdateUserFromDB,
     deletUserFromDB,
-    orderProductsFromDB,
-    getAllOrderProductsFromDB,
-    calculateTotalPriceFromDB,
+    functionFindONe,
 };
