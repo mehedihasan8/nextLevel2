@@ -37,7 +37,13 @@ const getSingleUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, functi
 const setUpdateUserFromDB = (userId, data) => __awaiter(void 0, void 0, void 0, function* () {
     const updatedUser = user_mode_1.User.findOneAndUpdate({ userId }, data, {
         new: true,
-        projection: { password: 0 },
+        projection: {
+            password: 0,
+            'fullName._id': 0,
+            _id: 0,
+            'address._id': 0,
+            orders: 0,
+        },
     });
     return updatedUser;
 });
