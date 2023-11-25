@@ -31,7 +31,7 @@ const userMainSchemaZodValidation = z.object({
   orders: z.array(ordersSchema).optional().default([]),
 });
 
-export const upDateUserValidationSchema = z.object({
+export const updateUserValidationSchema = z.object({
   userId: z.number().optional(),
   username: z.string().optional(),
   fullName: z

@@ -31,17 +31,17 @@ export type TUser = {
 };
 
 export type TUpdateUser = {
-  userId: number;
-  username: string;
-  fullName: {
+  userId?: number;
+  username?: string;
+  fullName?: {
     firstName: string;
     lastName: string;
   };
-  age: number;
-  email: string;
-  isActive: boolean;
-  hobbies: string[];
-  address: {
+  age?: number;
+  email?: string;
+  isActive?: boolean;
+  hobbies?: string[];
+  address?: {
     street: string;
     city: string;
     country: string;

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { UserServices } from './user.service';
 import {
-  upDateUserValidationSchema,
+  updateUserValidationSchema,
   userMainSchemaZodValidation,
 } from './user.validation';
 
@@ -92,11 +92,12 @@ const singleUserUpdate = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const updatedData = req.body;
-    const zodPassValidData = upDateUserValidationSchema.parse(updatedData);
+    const updateUserZodPassValidData =
+      updateUserValidationSchema.parse(updatedData);
 
     const updated_user = await UserServices.setUpdateUserFromDB(
       userId,
-      zodPassValidData,
+      updateUserZodPassValidData,
     );
 
     if (!updated_user) {

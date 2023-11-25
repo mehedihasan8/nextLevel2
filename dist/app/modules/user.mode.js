@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.User = exports.upDateUserSchema = void 0;
 const mongoose_1 = require("mongoose");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = __importDefault(require("../config"));
@@ -55,6 +55,23 @@ const userMainSchema = new mongoose_1.Schema({
     hobbies: { type: [String], required: true },
     address: { type: userAddressSchema, required: true },
     orders: [ordersSchema],
+});
+exports.upDateUserSchema = new mongoose_1.Schema({
+    userId: { type: Number },
+    username: { type: String },
+    fullName: {
+        firstName: { type: String },
+        lastName: { type: String },
+    },
+    age: { type: Number },
+    email: { type: String },
+    isActive: { type: Boolean },
+    hobbies: { type: [String] },
+    address: {
+        street: { type: String },
+        city: { type: String },
+        country: { type: String },
+    },
 });
 userMainSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {

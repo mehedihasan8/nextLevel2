@@ -87,8 +87,8 @@ const singleUserUpdate = (req, res) => __awaiter(void 0, void 0, void 0, functio
     try {
         const { userId } = req.params;
         const updatedData = req.body;
-        const zodPassValidData = user_validation_1.userMainSchemaZodValidation.parse(updatedData);
-        const updated_user = yield user_service_1.UserServices.setUpdateUserFromDB(userId, zodPassValidData);
+        const updateUserZodPassValidData = user_validation_1.updateUserValidationSchema.parse(updatedData);
+        const updated_user = yield user_service_1.UserServices.setUpdateUserFromDB(userId, updateUserZodPassValidData);
         if (!updated_user) {
             return res.status(404).json({
                 success: false,

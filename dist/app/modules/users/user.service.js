@@ -35,7 +35,7 @@ const getSingleUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, functi
 });
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setUpdateUserFromDB = (userId, data) => __awaiter(void 0, void 0, void 0, function* () {
-    const updatedUser = user_mode_1.User.findOneAndUpdate({ userId }, data, {
+    const updatedUser = yield user_mode_1.User.findOneAndUpdate({ userId }, { $set: data }, {
         new: true,
         projection: {
             password: 0,
