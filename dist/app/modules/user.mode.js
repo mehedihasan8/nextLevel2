@@ -40,9 +40,9 @@ const userAddressSchema = new mongoose_1.Schema({
     },
 });
 const ordersSchema = new mongoose_1.Schema({
-    productName: { type: String },
-    price: { type: Number },
-    quantity: { type: Number },
+    productName: { type: String, required: true },
+    price: { type: Number, required: true },
+    quantity: { type: Number, required: true },
 });
 const userMainSchema = new mongoose_1.Schema({
     userId: { type: Number, unique: true, required: true },

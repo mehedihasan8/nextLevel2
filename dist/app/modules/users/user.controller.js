@@ -17,7 +17,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { user: userData } = req.body;
         const zodPassValidData = user_validation_1.userMainSchemaZodValidation.parse(userData);
         const result = yield user_service_1.UserServices.createUserIntoDB(zodPassValidData);
-        const newUserWithoutPassword = Object.assign(Object.assign({}, result.toObject()), { password: undefined, _id: undefined });
+        const newUserWithoutPassword = Object.assign(Object.assign({}, result.toObject()), { password: undefined, _id: undefined, orders: undefined });
         res.status(200).json({
             success: true,
             message: 'User created successfully!',
@@ -88,7 +88,7 @@ const singleUserUpdate = (req, res) => __awaiter(void 0, void 0, void 0, functio
         const { userId } = req.params;
         const updatedData = req.body;
         const zodPassValidData = user_validation_1.userMainSchemaZodValidation.parse(updatedData);
-        const updated_user = yield user_service_1.UserServices.setUpdateUser(userId, zodPassValidData);
+        const updated_user = yield user_service_1.UserServices.setUpdateUserFromDB(userId, zodPassValidData);
         if (!updated_user) {
             return res.status(404).json({
                 success: false,
@@ -117,7 +117,7 @@ const singleUserUpdate = (req, res) => __awaiter(void 0, void 0, void 0, functio
 const deleteSingelUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userId } = req.params;
-        const deletedUser = yield user_service_1.UserServices.deletUser(userId);
+        const deletedUser = yield user_service_1.UserServices.deletUserFromDB(userId);
         if (!deletedUser) {
             return res.status(404).json({
                 success: false,
@@ -147,7 +147,7 @@ const addToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { userId } = req.params;
         const { productName, price, quantity } = req.body;
-        const user = yield user_service_1.UserServices.orderProducts(userId);
+        const user = yield user_service_1.UserServices.orderProductsFromDB(userId);
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -180,6 +180,87 @@ const addToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         });
     }
 });
+const getToProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userId } = req.params;
+        const user = yield user_service_1.UserServices.getAllOrderProductsFromDB(userId);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+                error: {
+                    code: 404,
+                    description: 'User not found!',
+                },
+            });
+        }
+        if (!user.orders || user.orders.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'No orders found for the user',
+                data: {
+                    orders: [],
+                },
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: 'Orders fetched successfully!',
+            data: {
+                orders: user.orders,
+            },
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Something went wrong',
+            data: error,
+        });
+    }
+});
+const calculateTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userId } = req.params;
+        const user = yield user_service_1.UserServices.getAllOrderProductsFromDB(userId);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+                error: {
+                    code: 404,
+                    description: 'User not found!',
+                },
+            });
+        }
+        if (!user.orders || user.orders.length === 0) {
+            return res.status(200).json({
+                success: true,
+                message: 'No orders found for the user',
+                data: {
+                    orders: [],
+                },
+            });
+        }
+        const totalPrice = user.orders.reduce((sum, order) => sum + order.price * order.quantity, 0);
+        res.status(200).json({
+            success: true,
+            message: 'Total price calculated successfully!',
+            data: {
+                totalPrice: totalPrice,
+            },
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message || 'Something went wrong',
+            data: error,
+        });
+    }
+});
 exports.UserController = {
     createUser,
     alluser,
@@ -187,4 +268,6 @@ exports.UserController = {
     singleUserUpdate,
     deleteSingelUser,
     addToProduct,
+    getToProduct,
+    calculateTotalPrice,
 };

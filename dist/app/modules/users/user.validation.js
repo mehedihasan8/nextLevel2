@@ -13,9 +13,9 @@ const userAddressSchema = zod_1.z.object({
     country: zod_1.z.string().min(1, 'Country must not be empty'),
 });
 const ordersSchema = zod_1.z.object({
-    productName: zod_1.z.string(),
-    price: zod_1.z.number(),
-    quantity: zod_1.z.number(),
+    productName: zod_1.z.string().min(1, 'product name must not be empty'),
+    price: zod_1.z.number().min(1, 'price must not be empty'),
+    quantity: zod_1.z.number().min(1, 'quantity must not be empty'),
 });
 const userMainSchemaZodValidation = zod_1.z.object({
     userId: zod_1.z.number({ required_error: 'User ID is required' }).transform(Number),

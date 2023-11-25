@@ -34,26 +34,36 @@ const getSingleUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, functi
     return result;
 });
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const setUpdateUser = (userId, data) => __awaiter(void 0, void 0, void 0, function* () {
+const setUpdateUserFromDB = (userId, data) => __awaiter(void 0, void 0, void 0, function* () {
     const updatedUser = user_mode_1.User.findOneAndUpdate({ userId }, data, {
         new: true,
         projection: { password: 0 },
     });
     return updatedUser;
 });
-const deletUser = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+const deletUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = user_mode_1.User.findOneAndDelete({ userId });
     return result;
 });
-const orderProducts = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_mode_1.User.findOne({ userId });
+const orderProductsFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = user_mode_1.User.findOne({ userId });
+    return result;
+});
+const getAllOrderProductsFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = user_mode_1.User.findOne({ userId });
+    return result;
+});
+const calculateTotalPriceFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = user_mode_1.User.findOne({ userId });
     return result;
 });
 exports.UserServices = {
     createUserIntoDB,
     getAllUserFromDB,
     getSingleUserFromDB,
-    setUpdateUser,
-    deletUser,
-    orderProducts,
+    setUpdateUserFromDB,
+    deletUserFromDB,
+    orderProductsFromDB,
+    getAllOrderProductsFromDB,
+    calculateTotalPriceFromDB,
 };
