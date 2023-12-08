@@ -7,7 +7,7 @@ import {
 
 const createUser = async (req: Request, res: Response) => {
   try {
-    const { user: userData } = req.body;
+    const userData = req.body;
 
     const zodPassValidData = userMainSchemaZodValidation.parse(userData);
 

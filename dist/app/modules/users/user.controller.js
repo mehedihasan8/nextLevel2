@@ -14,7 +14,7 @@ const user_service_1 = require("./user.service");
 const user_validation_1 = require("./user.validation");
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user: userData } = req.body;
+        const userData = req.body;
         const zodPassValidData = user_validation_1.userMainSchemaZodValidation.parse(userData);
         const result = yield user_service_1.UserServices.createUserIntoDB(zodPassValidData);
         const newUserWithoutPassword = Object.assign(Object.assign({}, result.toObject()), { password: undefined, _id: undefined, orders: undefined });
